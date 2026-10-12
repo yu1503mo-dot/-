@@ -78,3 +78,39 @@ $$Y_{ij} = \mathbf{\beta X_{j}} + \alpha_i + \gamma_j + \varepsilon_{ij}$$
 └─────────────────┘       └──────────────────────┘       └──────────────────────┘       └──────────────────┘
   ・生成パラメータ          ・Structured Outputs           ・形態素・品詞解析             ・パネルデータ化
   ・お題・属性フラグ        ・Seed固定 (再現性確保)        ・構文・可読性指標             ・CSV / JSONL 保存
+
+
+## 5. GitHubのファイル構成の構想
+
+fake-idiom-credibility-study/
+├── .gitignore                  # Git追跡除外設定ファイル
+├── .env.example                # 環境変数（APIキー等）のテンプレート
+├── README.md                   # 研究概要および再現手順マニュアル
+├── requirements.txt            # Python依存ライブラリ一覧 (spacy, ginza, openai, linearmodels, pyyaml等)
+│
+├── prompts/                    # 条件定義・プロンプト管理
+│   ├── config.yaml             # 生成条件・お題リスト設定ファイル
+│   └── templates.py            # LLM用プロンプトテンプレート関数
+│
+├── src/                        # 実行プログラム・パイプライン
+│   ├── generate_stories.py     # OpenAI APIを用いたテキスト自動生成スクリプト
+│   ├── extract_features.py     # GiNZAを用いたNLP特徴量自動抽出スクリプト
+│   └── build_dataset.py        # アンケート結果と特徴量を結合するパネルデータ作成処理
+│
+├── data/                       # データストレージ
+│   ├── raw/                    # 【除外対象】アンケート回収生データ（個人情報保護のため非公開）
+│   ├── generated/              # LLM生成データセット（JSONL形式）
+│   └── processed/              # 【一部除外】回帰分析用結合パネルデータ（CSV形式）
+│
+└── analysis/                   # 計量経済学・統計分析
+    ├── main_regression.py      # TWFEパネルOLS回帰分析スクリプト
+    └── robustness_checks.py    # サブサンプル分析および各種頑健性チェック
+
+
+
+
+
+
+
+
+
