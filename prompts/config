@@ -1,0 +1,26 @@
+# 共通パラメータ設定
+model_name: "gpt-4o-mini"
+seed: 42
+temperature: 0.7
+
+# 要因計画に基づくパラメータ条件設定
+conditions:
+  - id: "C1_HighAuth_Moral"
+    has_famous_person: true
+    sentiment: "教訓的・道徳的"
+  - id: "C2_HighAuth_Tragic"
+    has_famous_person: true
+    sentiment: "悲劇的・感情的"
+  - id: "C3_LowAuth_Moral"
+    has_famous_person: false
+    sentiment: "教訓的・道徳的"
+  - id: "C4_LowAuth_Tragic"
+    has_famous_person: false
+    sentiment: "悲劇的・感情的"
+
+# お題対象（実在／架空）
+targets:
+  - idiom: "四面楚歌"
+    type: "real_famous"
+  - idiom: "狐借竜威"
+    type: "fake_created"
